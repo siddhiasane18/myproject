@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Student</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:
+            linear-gradient(rgba(15,23,42,0.78), rgba(15,23,42,0.78)),
+            url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1400&auto=format&fit=crop');
+
+            background-size:cover;
+            background-position:center;
+        }
+
+        .container{
+            width:420px;
+            background:rgba(255,255,255,0.12);
+            backdrop-filter:blur(12px);
+            padding:40px;
+            border-radius:20px;
+            border:1px solid rgba(255,255,255,0.2);
+            box-shadow:0 15px 35px rgba(0,0,0,0.35);
+            text-align:center;
+        }
+
+        h2{
+            margin-bottom:20px;
+            color:white;
+            font-size:30px;
+            letter-spacing:1px;
+        }
+
+        p{
+            margin-bottom:25px;
+            color:#e2e8f0;
+            font-size:16px;
+        }
+
+        .btn{
+            padding:14px 20px;
+            border:none;
+            border-radius:12px;
+            cursor:pointer;
+            color:white;
+            font-size:15px;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        .delete-btn{
+            background:linear-gradient(135deg,#ef4444,#b91c1c);
+            box-shadow:0 8px 20px rgba(239,68,68,0.4);
+        }
+
+        .delete-btn:hover{
+            transform:translateY(-3px);
+            background:linear-gradient(135deg,#dc2626,#991b1b);
+        }
+
+        .cancel-btn{
+            display:inline-block;
+            margin-left:10px;
+            background:linear-gradient(135deg,#64748b,#334155);
+            padding:14px 20px;
+            border-radius:12px;
+            color:white;
+            text-decoration:none;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        .cancel-btn:hover{
+            transform:translateY(-3px);
+            background:linear-gradient(135deg,#475569,#1f2937);
+        }
+
+        @media(max-width:500px){
+            .container{
+                width:90%;
+                padding:30px;
+            }
+
+            h2{
+                font-size:24px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Delete Student</h2>
+
+    <p>
+        Are you sure you want to delete
+        <b>{{ student.username }}</b> ?
+    </p>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <button type="submit" class="btn delete-btn">
+            Yes Delete
+        </button>
+
+        <a href="/students/" class="cancel-btn">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+</body>
+</html>

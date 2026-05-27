@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marks</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+            background:#0f172a;
+            min-height:100vh;
+            color:white;
+        }
+
+        /* NAVBAR */
+        .navbar{
+            width:100%;
+            background:#020617;
+            padding:18px 40px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            box-shadow:0 5px 20px rgba(0,0,0,0.4);
+        }
+
+        .logo{
+            font-size:26px;
+            font-weight:bold;
+            color:#38bdf8;
+        }
+
+        .nav-links a{
+            color:white;
+            text-decoration:none;
+            margin-left:20px;
+            transition:0.3s;
+        }
+
+        .nav-links a:hover{
+            color:#38bdf8;
+        }
+
+        /* CONTAINER */
+        .container{
+            width:95%;
+            max-width:1200px;
+            margin:40px auto;
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:30px;
+            font-size:38px;
+            color:#38bdf8;
+        }
+
+        /* TABLE */
+        .table-box{
+            overflow-x:auto;
+            border-radius:20px;
+            background:rgba(255,255,255,0.05);
+            backdrop-filter:blur(10px);
+            box-shadow:0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        th{
+            background:#38bdf8;
+            color:#0f172a;
+            padding:18px;
+            font-size:17px;
+        }
+
+        td{
+            padding:18px;
+            text-align:center;
+            border-bottom:1px solid rgba(255,255,255,0.1);
+        }
+
+        tr{
+            transition:0.3s;
+        }
+
+        tr:hover{
+            background:rgba(255,255,255,0.08);
+        }
+
+        .marks{
+            color:#facc15;
+            font-weight:bold;
+        }
+
+        .course{
+            color:#cbd5e1;
+        }
+
+        .pass{
+            color:#22c55e;
+            font-weight:bold;
+        }
+
+        .fail{
+            color:#ef4444;
+            font-weight:bold;
+        }
+
+        /* EMPTY */
+        .empty{
+            text-align:center;
+            padding:40px;
+            color:#cbd5e1;
+            font-size:18px;
+        }
+
+        /* MOBILE */
+        @media(max-width:768px){
+
+            h1{
+                font-size:28px;
+            }
+
+            th, td{
+                padding:12px;
+                font-size:14px;
+            }
+
+            .navbar{
+                flex-direction:column;
+                gap:10px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+
+    <div class="logo">
+        🎓 Furtech Institute
+    </div>
+
+    <div class="nav-links">
+        <a href="/dashboard/">Dashboard</a>
+        <a href="/students/">Students</a>
+        <a href="/result/">Result</a>
+        <a href="/logout/">Logout</a>
+    </div>
+
+</div>
+
+<!-- CONTAINER -->
+<div class="container">
+
+    <h1>📝 Student Marks</h1>
+
+    <div class="table-box">
+
+        <table>
+
+            <tr>
+                <th>ID</th>
+                <th>Student Name</th>
+                <th>Course</th>
+                <th>Marks</th>
+                <th>Result</th>
+            </tr>
+
+            {% for student in students %}
+
+            <tr>
+
+                <td>{{ student.id }}</td>
+
+                <td>
+                    {{ student.user.username }}
+                </td>
+
+                <td class="course">
+                    {{ student.course }}
+                </td>
+
+                <td class="marks">
+                    {{ student.marks }}
+                </td>
+
+                <td>
+
+                    {% if student.marks >= 35 %}
+                        <span class="pass">PASS</span>
+                    {% else %}
+                        <span class="fail">FAIL</span>
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="5" class="empty">
+                    No Student Data Found
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

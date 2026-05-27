@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Results</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:'Segoe UI', sans-serif;
+    }
+
+    body{
+        background: linear-gradient(135deg, #0f172a, #1e293b, #0ea5e9);
+        min-height:100vh;
+        color:white;
+    }
+
+    /* HEADER */
+    .topbar{
+        background: rgba(0,0,0,0.3);
+        backdrop-filter: blur(10px);
+        padding:18px;
+        text-align:center;
+        font-size:20px;
+        font-weight:bold;
+        letter-spacing:1px;
+        animation: slideDown 0.8s ease;
+    }
+
+    @keyframes slideDown{
+        from{transform:translateY(-50px); opacity:0;}
+        to{transform:translateY(0); opacity:1;}
+    }
+
+    h2{
+        text-align:center;
+        margin:25px 0;
+        font-size:30px;
+        animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn{
+        from{opacity:0;}
+        to{opacity:1;}
+    }
+
+    /* CONTAINER */
+    .container{
+        width:90%;
+        max-width:900px;
+        margin:auto;
+        padding-bottom:40px;
+    }
+
+    /* CARD */
+    .card{
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(15px);
+        border:1px solid rgba(255,255,255,0.2);
+        padding:18px 20px;
+        margin:15px 0;
+        border-radius:15px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        transition:0.4s;
+        animation: popUp 0.6s ease;
+    }
+
+    @keyframes popUp{
+        from{transform:scale(0.8); opacity:0;}
+        to{transform:scale(1); opacity:1;}
+    }
+
+    .card:hover{
+        transform:translateY(-8px) scale(1.02);
+        box-shadow:0 15px 30px rgba(0,0,0,0.4);
+    }
+
+    /* NAME */
+    .name{
+        font-weight:bold;
+        width:25%;
+        font-size:18px;
+    }
+
+    .marks{
+        width:15%;
+        font-size:16px;
+        color:#e2e8f0;
+    }
+
+    /* BADGE */
+    .badge{
+        padding:6px 14px;
+        border-radius:20px;
+        font-weight:bold;
+        font-size:13px;
+        animation: glow 2s infinite alternate;
+    }
+
+    .pass{
+        background:#22c55e;
+        box-shadow:0 0 10px #22c55e;
+    }
+
+    .fail{
+        background:#ef4444;
+        box-shadow:0 0 10px #ef4444;
+    }
+
+    @keyframes glow{
+        from{box-shadow:0 0 5px rgba(255,255,255,0.2);}
+        to{box-shadow:0 0 15px rgba(255,255,255,0.6);}
+    }
+
+    /* BUTTON */
+    .edit{
+        text-decoration:none;
+        background:linear-gradient(45deg,#38bdf8,#0ea5e9);
+        color:white;
+        padding:7px 15px;
+        border-radius:10px;
+        font-size:13px;
+        transition:0.3s;
+    }
+
+    .edit:hover{
+        transform:scale(1.1);
+        box-shadow:0 10px 20px rgba(14,165,233,0.5);
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    🎓 Student Result System
+</div>
+
+<h2>📊 Results Dashboard</h2>
+
+<div class="container">
+
+{% for student in students %}
+
+<div class="card">
+
+    <div class="name">
+        {{ student.user.username }}
+    </div>
+
+    <div class="marks">
+        {{ student.marks }} Marks
+    </div>
+
+    {% if student.marks >= 33 %}
+        <div class="badge pass">PASS</div>
+    {% else %}
+        <div class="badge fail">FAIL</div>
+    {% endif %}
+
+    <a class="edit" href="{% url 'update_student' student.id %}">
+        Edit
+    </a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>

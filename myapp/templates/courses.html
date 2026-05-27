@@ -1,0 +1,751 @@
+<!-- ================= courses.html ================= -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>
+    FutureTech Institute Courses
+</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#eef3f9;
+}
+
+/* NAVBAR */
+
+.navbar{
+
+    width:100%;
+
+    background:#0f172a;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 60px;
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+
+    color:#38bdf8;
+
+    font-size:30px;
+    font-weight:bold;
+}
+
+.nav-links{
+
+    display:flex;
+    gap:18px;
+    align-items:center;
+}
+
+/* BUTTON */
+
+.add-btn{
+
+    background:linear-gradient(135deg,#38bdf8,#2563eb);
+
+    color:white;
+
+    padding:12px 24px;
+
+    text-decoration:none;
+
+    border-radius:40px;
+
+    font-weight:bold;
+
+    transition:0.4s;
+}
+
+.add-btn:hover{
+
+    transform:scale(1.05);
+}
+
+.logout-btn{
+
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+
+}
+
+.dashboard-btn{
+
+    background:linear-gradient(135deg,#22c55e,#15803d);
+
+}
+
+/* HERO */
+
+.hero{
+
+    height:40vh;
+
+    background:
+    linear-gradient(rgba(15,23,42,0.8),
+    rgba(15,23,42,0.8)),
+
+    url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1600&auto=format&fit=crop');
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+
+    color:white;
+
+    text-align:center;
+}
+
+.hero h1{
+
+    font-size:60px;
+
+    margin-bottom:15px;
+
+    animation:slideDown 1s ease;
+}
+
+.hero p{
+
+    font-size:20px;
+
+    color:#e2e8f0;
+}
+
+/* GRID */
+
+.container{
+
+    width:90%;
+    margin:auto;
+
+    padding:60px 0;
+}
+
+.course-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(300px,1fr));
+
+    gap:35px;
+}
+
+/* CARD */
+
+.card{
+
+    background:white;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.08);
+
+    transition:0.4s;
+
+    position:relative;
+
+    animation:fadeUp 0.8s ease;
+}
+
+.card:hover{
+
+    transform:translateY(-12px) scale(1.02);
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,0.18);
+}
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:100%;
+    height:100%;
+
+    background:
+    linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.4),
+    transparent);
+
+    transition:0.6s;
+}
+
+.card:hover::before{
+
+    left:100%;
+}
+
+.card-top{
+
+    height:8px;
+
+    background:
+    linear-gradient(90deg,#38bdf8,#2563eb);
+}
+
+.card-content{
+
+    padding:30px;
+}
+
+.card h2{
+
+    color:#0f172a;
+
+    margin-bottom:15px;
+}
+
+.card p{
+
+    color:#64748b;
+
+    line-height:1.7;
+
+    margin-bottom:15px;
+}
+
+.tag{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    background:#dcfce7;
+
+    color:#16a34a;
+
+    font-weight:bold;
+
+    margin-bottom:18px;
+}
+
+.btn{
+
+    display:inline-block;
+
+    padding:12px 25px;
+
+    background:
+    linear-gradient(135deg,#38bdf8,#2563eb);
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:40px;
+
+    transition:0.3s;
+
+    border:none;
+    cursor:pointer;
+}
+
+.btn:hover{
+
+    transform:translateY(-3px);
+}
+
+/* POPUP */
+
+.popup{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,0.7);
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:2000;
+}
+
+.popup-content{
+
+    background:white;
+
+    width:90%;
+    max-width:500px;
+
+    padding:35px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    animation:popupShow 0.4s ease;
+}
+
+.popup-content h2{
+
+    color:#0f172a;
+
+    margin-bottom:15px;
+}
+
+.popup-content p{
+
+    color:#64748b;
+
+    margin-bottom:15px;
+
+    line-height:1.7;
+}
+
+.close-btn{
+
+    margin-top:20px;
+
+    padding:12px 24px;
+
+    border:none;
+
+    background:#ef4444;
+
+    color:white;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+/* FOOTER */
+
+footer{
+
+    background:#0f172a;
+
+    color:#cbd5e1;
+
+    text-align:center;
+
+    padding:22px;
+
+    margin-top:40px;
+}
+
+/* ANIMATION */
+
+@keyframes slideDown{
+
+    from{
+        opacity:0;
+        transform:translateY(-40px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes popupShow{
+
+    from{
+        opacity:0;
+        transform:scale(0.7);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+
+        🚀 FutureTech Institute
+
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/dashboard/" class="add-btn dashboard-btn">
+            📊 Dashboard
+        </a>
+
+        <a href="/add-course/" class="add-btn">
+            ➕ Add Course
+        </a>
+
+        <a href="/logout/" class="add-btn logout-btn">
+            🚪 Logout
+        </a>
+
+    </div>
+
+</div>
+
+<!-- HERO -->
+
+<div class="hero">
+
+    <h1>
+        Professional Courses
+    </h1>
+
+    <p>
+        Learn Future Skills With Modern Technology
+    </p>
+
+</div>
+
+<!-- COURSES -->
+
+<div class="container">
+
+    <div class="course-grid">
+
+        <!-- COURSE 1 -->
+
+        <div class="card">
+
+            <div class="card-top"></div>
+
+            <div class="card-content">
+
+                <div class="tag">
+                    ₹4,999
+                </div>
+
+                <h2>
+                    Full Stack Web Development
+                </h2>
+
+                <p>
+                    Learn HTML, CSS, JavaScript, Django & React with live projects.
+                </p>
+
+                <p>
+                    ⏳ Duration :
+                    6 Months
+                </p>
+
+                <p>
+                    👨‍🏫 Trainer :
+                    Rahul Sharma
+                </p>
+
+                <button class="btn"
+                onclick="showPopup(
+                'Full Stack Web Development',
+                'Master frontend and backend development using modern tools like Django and React. Includes live projects and certification.'
+                )">
+
+                    Learn More
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- COURSE 2 -->
+
+        <div class="card">
+
+            <div class="card-top"></div>
+
+            <div class="card-content">
+
+                <div class="tag">
+                    ₹6,499
+                </div>
+
+                <h2>
+                    Python Programming Masterclass
+                </h2>
+
+                <p>
+                    Beginner to advanced Python including automation and AI basics.
+                </p>
+
+                <p>
+                    ⏳ Duration :
+                    4 Months
+                </p>
+
+                <p>
+                    👨‍🏫 Trainer :
+                    Priya Verma
+                </p>
+
+                <button class="btn"
+                onclick="showPopup(
+                'Python Programming Masterclass',
+                'Learn Python from scratch with automation, APIs, data handling and AI fundamentals.'
+                )">
+
+                    Learn More
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- COURSE 3 -->
+
+        <div class="card">
+
+            <div class="card-top"></div>
+
+            <div class="card-content">
+
+                <div class="tag">
+                    ₹7,999
+                </div>
+
+                <h2>
+                    Data Science & Machine Learning
+                </h2>
+
+                <p>
+                    Learn Pandas, NumPy, ML models and real-world AI applications.
+                </p>
+
+                <p>
+                    ⏳ Duration :
+                    8 Months
+                </p>
+
+                <p>
+                    👨‍🏫 Trainer :
+                    Amit Kulkarni
+                </p>
+
+                <button class="btn"
+                onclick="showPopup(
+                'Data Science & Machine Learning',
+                'Build intelligent systems using machine learning, data analysis and visualization tools.'
+                )">
+
+                    Learn More
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- COURSE 4 -->
+
+        <div class="card">
+
+            <div class="card-top"></div>
+
+            <div class="card-content">
+
+                <div class="tag">
+                    ₹5,499
+                </div>
+
+                <h2>
+                    UI/UX Design Professional
+                </h2>
+
+                <p>
+                    Master Figma, Adobe XD and create stunning user experiences.
+                </p>
+
+                <p>
+                    ⏳ Duration :
+                    3 Months
+                </p>
+
+                <p>
+                    👨‍🏫 Trainer :
+                    Sneha Patil
+                </p>
+
+                <button class="btn"
+                onclick="showPopup(
+                'UI/UX Design Professional',
+                'Design beautiful and user-friendly interfaces with Figma, Adobe XD and modern design systems.'
+                )">
+
+                    Learn More
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- COURSE 5 -->
+
+        <div class="card">
+
+            <div class="card-top"></div>
+
+            <div class="card-content">
+
+                <div class="tag">
+                    ₹8,999
+                </div>
+
+                <h2>
+                    Cyber Security Expert Program
+                </h2>
+
+                <p>
+                    Ethical hacking, penetration testing and network security training.
+                </p>
+
+                <p>
+                    ⏳ Duration :
+                    7 Months
+                </p>
+
+                <p>
+                    👨‍🏫 Trainer :
+                    Arjun Mehta
+                </p>
+
+                <button class="btn"
+                onclick="showPopup(
+                'Cyber Security Expert Program',
+                'Learn ethical hacking, cyber defense, penetration testing and network protection techniques.'
+                )">
+
+                    Learn More
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- POPUP -->
+
+<div class="popup" id="popup">
+
+    <div class="popup-content">
+
+        <h2 id="popupTitle"></h2>
+
+        <p id="popupText"></p>
+
+        <button class="close-btn"
+        onclick="closePopup()">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+
+<footer>
+
+    © 2026 FutureTech Institute
+
+</footer>
+
+<script>
+
+function showPopup(title,description){
+
+    document.getElementById("popup").style.display="flex";
+
+    document.getElementById("popupTitle").innerText=title;
+
+    document.getElementById("popupText").innerText=description;
+}
+
+function closePopup(){
+
+    document.getElementById("popup").style.display="none";
+}
+
+window.onclick=function(event){
+
+    const popup=document.getElementById("popup");
+
+    if(event.target==popup){
+
+        popup.style.display="none";
+    }
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:
+            linear-gradient(rgba(15,23,42,0.75), rgba(15,23,42,0.75)),
+            url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1400&auto=format&fit=crop');
+
+            background-size:cover;
+            background-position:center;
+        }
+
+        .box{
+            width:400px;
+            background:rgba(255,255,255,0.12);
+            backdrop-filter:blur(12px);
+            padding:40px;
+            border-radius:20px;
+            border:1px solid rgba(255,255,255,0.2);
+            box-shadow:0 15px 35px rgba(0,0,0,0.35);
+            text-align:center;
+        }
+
+        .box h2{
+            margin-bottom:30px;
+            color:white;
+            font-size:32px;
+            letter-spacing:1px;
+        }
+
+        input{
+            width:100%;
+            padding:14px;
+            margin-bottom:20px;
+            border:none;
+            border-radius:12px;
+            font-size:15px;
+            outline:none;
+            background:rgba(255,255,255,0.18);
+            color:white;
+            transition:0.3s;
+            border:1px solid transparent;
+        }
+
+        input::placeholder{
+            color:#e2e8f0;
+        }
+
+        input:focus{
+            border:1px solid #38bdf8;
+            background:rgba(255,255,255,0.25);
+            box-shadow:0 0 12px rgba(56,189,248,0.5);
+        }
+
+        button{
+            width:100%;
+            padding:14px;
+            background:linear-gradient(135deg,#38bdf8,#2563eb);
+            border:none;
+            color:white;
+            font-size:17px;
+            font-weight:bold;
+            border-radius:12px;
+            cursor:pointer;
+            transition:0.3s;
+            box-shadow:0 8px 20px rgba(37,99,235,0.4);
+        }
+
+        button:hover{
+            transform:translateY(-3px);
+            background:linear-gradient(135deg,#0ea5e9,#1d4ed8);
+        }
+
+        .error{
+            color:#ffb4b4;
+            font-size:14px;
+            margin-bottom:18px;
+            font-weight:bold;
+        }
+
+        .link{
+            margin-top:20px;
+            display:block;
+            color:white;
+            font-size:15px;
+        }
+
+        .link a{
+            color:#38bdf8;
+            text-decoration:none;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        .link a:hover{
+            color:#7dd3fc;
+            text-decoration:underline;
+        }
+
+        @media(max-width:500px){
+
+            .box{
+                width:90%;
+                padding:30px;
+            }
+
+            .box h2{
+                font-size:26px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2>Student Login</h2>
+
+    <p class="error">
+        {% if error %}
+            {{ error }}
+        {% endif %}
+    </p>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <input type="text"
+               name="username"
+               placeholder="Username">
+
+        <input type="password"
+               name="password"
+               placeholder="Password">
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+    <div class="link">
+        <a href="/register/">
+            Create New Account
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>

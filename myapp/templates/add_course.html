@@ -1,0 +1,151 @@
+<!-- ================= add_course.html ================= -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>
+    Add Course
+</title>
+
+<style>
+
+body{
+    background:#eef3f9;
+    font-family:'Poppins',sans-serif;
+}
+
+.container{
+
+    width:450px;
+
+    margin:70px auto;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.1);
+}
+
+h1{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    color:#0f172a;
+}
+
+input, textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:18px;
+
+    border:1px solid #ccc;
+
+    border-radius:10px;
+
+    outline:none;
+}
+
+button{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:
+    linear-gradient(135deg,#38bdf8,#2563eb);
+
+    color:white;
+
+    font-size:17px;
+
+    cursor:pointer;
+}
+
+button:hover{
+
+    opacity:0.9;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>
+        ➕ Add New Course
+    </h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <input
+            type="text"
+            name="title"
+            placeholder="Course Title"
+            required
+        >
+
+        <textarea
+            name="description"
+            placeholder="Course Description"
+            rows="5"
+            required
+        ></textarea>
+
+        <input
+            type="text"
+            name="duration"
+            placeholder="Duration"
+            required
+        >
+
+        <input
+            type="text"
+            name="trainer"
+            placeholder="Trainer Name"
+            required
+        >
+
+        <input
+            type="text"
+            name="price"
+            placeholder="Price"
+            required
+        >
+
+        <button type="submit">
+
+            Save Course
+
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

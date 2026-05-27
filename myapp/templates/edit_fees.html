@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Fees</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            animation: bgMove 6s infinite alternate;
+        }
+
+        @keyframes bgMove {
+            from {filter: hue-rotate(0deg);}
+            to {filter: hue-rotate(20deg);}
+        }
+
+        .box {
+            width: 380px;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            animation: popIn 0.7s ease;
+            transition: 0.3s;
+        }
+
+        .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.25);
+        }
+
+        @keyframes popIn {
+            from {opacity: 0; transform: scale(0.8);}
+            to {opacity: 1; transform: scale(1);}
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            animation: fadeDown 0.6s ease;
+        }
+
+        @keyframes fadeDown {
+            from {opacity: 0; transform: translateY(-20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        label {
+            font-weight: 600;
+            color: #444;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 18px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            outline: none;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        select:focus, input:focus {
+            border-color: #ff7e5f;
+            box-shadow: 0 0 10px rgba(255,126,95,0.4);
+            transform: scale(1.02);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2>✏ Edit Student Fees</h2>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <label>Select Course</label>
+        <select name="course">
+
+            {% for course in courses %}
+                <option value="{{ course.id }}">
+                    {{ course.title }}
+                </option>
+            {% endfor %}
+
+        </select>
+
+        <label>Paid Fees</label>
+        <input type="number" name="paid_fees" value="{{ student.paid_fees }}">
+
+        <button type="submit">Update Fees</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
